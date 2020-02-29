@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '~/services/api';
 
 import {
@@ -12,13 +12,15 @@ import {
   LogoutButton,
 } from './styles';
 import { signOutTest } from '~/store/modules/auth/actions';
+import { changeTheme } from '~/store/modules/config/actions';
 
-export default function Main() {
+export default function Config() {
   const [value, setValue] = useState('thejoaov');
   const [user, setUser] = useState([]);
   const [visible, setVisible] = useState(false);
 
   const dispatch = useDispatch();
+  const theme = useSelector(state => state.config.theme);
 
   useEffect(() => {
     user.avatar_url ? setVisible(true) : setVisible(false);
@@ -31,7 +33,7 @@ export default function Main() {
   }
 
   return (
-    <Container>
+    <Container backgroundColor={theme}>
       <Title>Hello World!</Title>
       {!visible ? (
         <>
@@ -57,6 +59,9 @@ export default function Main() {
       <LogoutButton onPress={() => dispatch(signOutTest())}>
         <Text>Logout</Text>
       </LogoutButton>
+      <GithubUserButton onPress={() => dispatch(changeTheme())}>
+        <Text>Change Theme</Text>
+      </GithubUserButton>
     </Container>
   );
 }

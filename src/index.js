@@ -1,19 +1,25 @@
 import React from 'react';
+import 'react-native-gesture-handler';
 
 import '~/config/ReactotronConfig';
 
+import { NavigationContainer } from '@react-navigation/native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import { store, persistor } from '~/store';
 
-import Bootstrap from './bootstrap';
+import Routes from './routes';
 
-const App = () => (
-  <Provider store={store}>
-    <PersistGate persistor={persistor}>
-      <Bootstrap />
-    </PersistGate>
-  </Provider>
-);
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <Routes />
+        </PersistGate>
+      </Provider>
+    </NavigationContainer>
+  );
+};
 
 export default App;

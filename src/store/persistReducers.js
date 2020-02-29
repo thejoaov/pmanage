@@ -6,9 +6,9 @@ export default reducers => {
     {
       key: 'app',
       storage: AsyncStorage,
-      whitelist: ['auth'],
+      whitelist: ['auth', 'config'],
     },
-    reducers
+    reducers,
   );
 
   return persistedReducer;
